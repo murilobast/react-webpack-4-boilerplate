@@ -7,16 +7,16 @@ import App from './App'
 import './main.styl'
 
 const startApp = Component => {
-    const rootElement = document.querySelector('#root')
+	const rootElement = document.querySelector('#root')
 
-    render(<Component />, rootElement)
+	render(<Component />, rootElement)
 }
 
 startApp(App)
 
 // webpack Hot Module Replacement API
 if (module.hot) {
-    module.hot.accept('./App', () => {
-        startApp(App)
-    })
+	module.hot.accept('./App', () => {
+		startApp(App)
+	})
   }

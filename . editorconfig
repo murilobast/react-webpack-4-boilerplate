@@ -1,0 +1,5 @@
+insert_final_newline = true
+
+# Identation
+indent_size = 2
+indent_style = tab

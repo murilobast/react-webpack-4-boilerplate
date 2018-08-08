@@ -13,35 +13,35 @@ const miniCssPlugin = require('./plugins/miniCssPlugin')
 const optimization = require('./optimization')
 
 module.exports = (env, argv) => {
-    const isDev = argv.mode !== 'production'
+	const isDev = argv.mode !== 'production'
 
-    return {
-        module: {
-            rules: [
-                {
-                    test: /\.js$/,
-                    exclude: /node_modules/,
-                    use: {
-                        loader: 'babel-loader'
-                    }
-                },
-                ...cssLoader(isDev)
-            ]
-        },
-        plugins: [
-            new CleanWebpackPlugin(['dist'], {
-                root: path.resolve(__dirname, '../'),
-                verbose: true
-            }),
-            ...htmlPlugin(),
-            ...miniCssPlugin(isDev),
-            new webpack.ProvidePlugin({
-                React: 'react'
-            })
-        ],
-        output: {
-            filename: '[name]-[hash:8].bundle.js'
-        },
-        optimization: optimization(isDev)
-    }
+	return {
+		module: {
+			rules: [
+				{
+					test: /\.js$/,
+					exclude: /node_modules/,
+					use: {
+						loader: 'babel-loader'
+					}
+				},
+				...cssLoader(isDev)
+			]
+		},
+		plugins: [
+			new CleanWebpackPlugin(['dist'], {
+				root: path.resolve(__dirname, '../'),
+				verbose: true
+			}),
+			...htmlPlugin(),
+			...miniCssPlugin(isDev),
+			new webpack.ProvidePlugin({
+				React: 'react'
+			})
+		],
+		output: {
+			filename: '[name]-[hash:8].bundle.js'
+		},
+		optimization: optimization(isDev)
+	}
 }
