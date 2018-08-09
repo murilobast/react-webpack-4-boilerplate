@@ -1,0 +1,1 @@
+module.export = 'blank-file'

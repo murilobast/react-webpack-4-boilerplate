@@ -1,7 +1,7 @@
 import { render } from 'react-dom'
 
 // Components
-import App from './App'
+import App from 'containers/App'
 
 // Styles
 import './main.styl'
@@ -16,7 +16,7 @@ startApp(App)
 
 // webpack Hot Module Replacement API
 if (module.hot) {
-	module.hot.accept('./App', () => {
+	module.hot.accept('containers/App', () => {
 		startApp(App)
 	})
   }

@@ -42,6 +42,12 @@ module.exports = (env, argv) => {
 		output: {
 			filename: '[name]-[hash:8].bundle.js'
 		},
-		optimization: optimization(isDev)
+		optimization: optimization(isDev),
+		resolve: {
+			modules: [
+				path.resolve(__dirname, '../src/'),
+				'node_modules'
+			]
+		}
 	}
 }
