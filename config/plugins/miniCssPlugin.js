@@ -15,6 +15,10 @@ const stylusLoaderOptions = new webpack.LoaderOptionsPlugin({
 					'css-mqpacker'
 				]),
 				rupture()
+			],
+			import: [
+				'~styles/abstractions/variables.styl',
+				'~styles/abstractions/functions.styl'
 			]
 		},
 		options: {
@@ -29,4 +33,4 @@ const miniCssPlugin = new MiniCssExtractPlugin({
 
 module.exports = isDev => !isDev
 	? [miniCssPlugin, stylusLoaderOptions]
-	: []
+	: [stylusLoaderOptions]

@@ -1,10 +1,16 @@
-import Counter from 'components/Counter'
+// Components
+// import Header from 'containers/Header'
+// import Footer from 'components/shared/Footer'
 
-const App = props => (
-	<div className="app">
-		<h1>It Works!</h1>
-		<Counter />
-	</div>
+// Stylus
+import 'styles/main.styl'
+
+const App = ({ children }) => (
+	<main>
+		{/* <Header /> */}
+		{children}
+		{/* <Footer /> */}
+	</main>
 )
 
 export default App

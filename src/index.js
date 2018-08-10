@@ -1,22 +1,37 @@
 import { render } from 'react-dom'
+import { match, browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 
-// Components
-import App from 'containers/App'
+// Configs
+import routes from 'routes'
+import configureStore from 'configureStore'
 
-// Styles
-import './main.styl'
+// Containers
+import Root from './containers/Root'
 
-const startApp = Component => {
-	const rootElement = document.querySelector('#root')
+const { pathname, search, hash } = window.location
+const location = `${pathname}${search}${hash}`
+const store = configureStore()
+const history = syncHistoryWithStore(browserHistory, store)
+const rootProps = { store, history }
+const rootEl = document.getElementById('root')
 
-	render(<Component />, rootElement)
-}
-
-startApp(App)
-
-// webpack Hot Module Replacement API
-if (module.hot) {
-	module.hot.accept('containers/App', () => {
-		startApp(App)
+const renderApp = rootProps => (
+	match({ routes, location }, (err, redirectLocation, renderProps) => {
+		const props = {
+			...rootProps,
+			...renderProps
+		}
+		render(
+			<Root {...props} />,
+			rootEl
+		)
 	})
-  }
+)
+
+renderApp(rootProps)
+
+if (module.hot) {
+	module.hot.accept('containers/Root', () => renderApp(rootProps))
+	module.hot.accept('routes', () => renderApp(rootProps))
+}
